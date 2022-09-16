@@ -59,29 +59,8 @@ mysql-set-2   1/1         Running        0                 120s
 ## create service account
 ```
 >> kubectl create serviceaccount jenkins
->> kubectl describe serviceaccount jenkins
-
-Name:                jenkins
-Namespace:           default
-Labels:              <none>
-Annotations:         <none>
-Image pull secrets:  <none>
-Mountable secrets:   jenkins-token-rfbzr
-Tokens:              jenkins-token-rfbzr
-Events:              <none>
-
->> kubectl describe secret jenkins-token-rfbzr
-Name:         jenkins-token-rfbzr
-Namespace:    default
-Labels:       <none>
-Annotations:  kubernetes.io/service-account.name: jenkins
-              kubernetes.io/service-account.uid: ac331ed8-bde2-4507-b896-73ead8d40d65
-
-Type:  kubernetes.io/service-account-token
-
-Data
-====
-ca.crt:     1029 bytes
-namespace:  7 bytes
-token:      eyJhbGciOiJS...
+>> kubectl get serviceaccount jenkins -o=jsonpath='{.secrets[0].name}'
+'jenkins-token-rfbzr'
+>> kubectl get secret jenkins-token-rfbzr -o=jsonpath='{.data.token}' |base64 -d 
+'eyJhbGciOiJS...'
 ```
