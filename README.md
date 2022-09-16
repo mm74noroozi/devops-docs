@@ -67,7 +67,7 @@ mysql-set-2   1/1         Running        0                 120s
 ## Application monitoring (jaeger)
 ## ansible 
 inventory
-```
+```YAML
 leafs:
   hosts:
     leaf01:
@@ -102,3 +102,6 @@ datacenter:
   children:
     network:
     webservers:
+```
+## Network layers
+![1-01](https://user-images.githubusercontent.com/41954275/190675013-38d3f4d2-c946-4e2c-90aa-b3b8cce3f57d.jpg)
