@@ -64,3 +64,4 @@ mysql-set-2   1/1         Running        0                 120s
 >> kubectl get secret jenkins-token-rfbzr -o=jsonpath='{.data.token}' |base64 -d 
 'eyJhbGciOiJS...'
 ```
+## Application monitoring (jaeger)
