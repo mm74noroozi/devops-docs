@@ -65,3 +65,40 @@ mysql-set-2   1/1         Running        0                 120s
 'eyJhbGciOiJS...'
 ```
 ## Application monitoring (jaeger)
+## ansible 
+inventory
+```
+leafs:
+  hosts:
+    leaf01:
+      ansible_host: 192.0.2.100
+    leaf02:
+      ansible_host: 192.0.2.110
+
+spines:
+  hosts:
+    spine01:
+      ansible_host: 192.0.2.120
+    spine02:
+      ansible_host: 192.0.2.130
+
+network:
+  children:
+    leafs:
+    spines:
+
+webservers:
+  hosts:
+    webserver01:
+      ansible_host: 192.0.2.140
+      http_port: 80
+      ansible_user: my_server_user
+    webserver02:
+      ansible_host: 192.0.2.150
+  vars:
+    ansible_user: my_global_server_user
+  
+datacenter:
+  children:
+    network:
+    webservers:
