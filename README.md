@@ -47,3 +47,12 @@ spec:
         requests:
           storage: 5Gi
 ```
+result:
+```
+kubectl get pods
+
+NAME          READY   STATUS      RESTARTS   AGE
+mysql-set-0   1/1         Running        0                 142s
+mysql-set-1   1/1         Running        0                 132s
+mysql-set-2   1/1         Running        0                 120s
+```
