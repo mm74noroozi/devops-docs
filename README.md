@@ -105,3 +105,11 @@ datacenter:
 ```
 ## Network layers
 ![1-01](https://user-images.githubusercontent.com/41954275/190675013-38d3f4d2-c946-4e2c-90aa-b3b8cce3f57d.jpg)
+## delete evicted pods and jobs
+```bash
+kubectl get pods -n homeca-site --field-selector=status.phase=Failed
+kubectl delete pods -n homeca-site --field-selector=status.phase=Failed
+
+kubectl get jobs -n homeca-site --field-selector status.successful=0
+kubectl delete jobs -n homeca-site --field-selector status.successful=0
+```
