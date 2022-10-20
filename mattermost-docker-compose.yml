@@ -1,0 +1,31 @@
+version: "3.9"
+services: 
+  mmdb:
+    image: hub.hamdocker.ir/library/postgres:15
+    restart: always
+    volumes:
+      - ./mmdb:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: mattermost
+      POSTGRES_PASSWORD: ${PASSWD}
+      POSTGRES_DB: mattermost
+    networks:
+      - dnsserver_default
+
+  mattermost:
+    image: hub.hamdocker.ir/mattermost/mattermost-team-edition:7.3.1
+    restart: always
+    volumes:
+      - ./mmconfig:/mattermost/config
+      - ./mmdata:/mattermost/data
+      - ./mmlogs:/mattermost/logs
+      - ./mmplugins:/mattermost/plugins
+      - ./mmclient-plugins:/mattermost/client/plugins
+    environment:
+      MM_SQLSETTINGS_DATASOURCE: postgres://mattermost:${PASSWD}@mmdb:5432/mattermost?sslmode=disable&connect_timeout=10
+    networks:
+      - dnsserver_default
+
+networks:
+   dnsserver_default:
+      external: true
