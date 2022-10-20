@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  rocketchat:
+    image: hub.hamdocker.ir/library/rocket.chat:latest
+    restart: always
+    environment:
+      MONGO_URL: "mongodb://mongodb:27017/rocketchat?replicaSet=rs0"
+      MONGO_OPLOG_URL: "mongodb://mongodb:27017/local?replicaSet=rs0"
+      ROOT_URL: ${APP_URL}
+      PORT: 3000
+      DEPLOY_METHOD: docker
+      DEPLOY_PLATFORM: ${DEPLOY_PLATFORM}
+    depends_on:
+      - mongodb
+    networks:
+      - dnsserver_default
+
+  mongodb:
+    image: hub.hamdocker.ir/bitnami/mongodb:4.4
+    restart: always
+    volumes:
+      - ./mongodb_data:/bitnami/mongodb
+    environment:
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_REPLICA_SET_NAME: rs0
+      MONGODB_PORT_NUMBER: 27017
+      MONGODB_INITIAL_PRIMARY_HOST: mongodb
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: 27017
+      MONGODB_ADVERTISED_HOSTNAME: mongodb
+      MONGODB_ENABLE_JOURNAL: "true"
+      ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - dnsserver_default
+      
+networks:
+   dnsserver_default:
+      external: true
