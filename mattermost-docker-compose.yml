@@ -25,6 +25,8 @@ services:
       MM_SQLSETTINGS_DATASOURCE: postgres://mattermost:${PASSWD}@mmdb:5432/mattermost?sslmode=disable&connect_timeout=10
     networks:
       - dnsserver_default
+    #expose:
+    #  - 8065
     ports:
       - 8443:8443
 networks:
