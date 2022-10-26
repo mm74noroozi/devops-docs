@@ -1,0 +1,23 @@
+stages:
+  - build_deploy
+  - show_logs
+variables:
+  PRODUTION_PATH: /root/sms_marketing/
+  COMPOSE_FILE: $PRODUTION_PATH/docker-compose.yml
+  ASSET_FOLDER: $PRODUTION_PATH/assets
+production:
+    stage: build_deploy
+    tags:
+      - shell
+    script:
+      - sudo rsync --exclude $ASSET_FOLDER --exclude $COMPOSE_FILE $CI_PROJECT $PRODUTION_PATH
+      - sudo docker-compose -f $COMPOSE_FILE up -d --build sms_marketing
+    only:
+        - main
+
+production-logs:
+  stage: show_logs
+  only:
+    - main
+  script:
+    - sudo docker-compose -f $COMPOSE_FILE logs --tail=100 sms_marketing
