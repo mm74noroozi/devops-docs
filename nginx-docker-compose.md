@@ -129,7 +129,6 @@ server
 		proxy_ignore_headers Set-Cookie Cache-Control Vary;
 		proxy_hide_header Vary;
 		proxy_hide_header Access-Control-Allow-Origin;
-		add_header Access-Control-Allow-Origin \"*\";
 		proxy_cache_key $host$request_uri;
 		proxy_cache_min_uses 2;
 		proxy_cache_valid 200 10h;
@@ -156,7 +155,6 @@ server
 	proxy_ignore_headers Set-Cookie Cache-Control Vary;
 	proxy_hide_header Vary;
 	proxy_hide_header Access-Control-Allow-Origin;
-	add_header Access-Control-Allow-Origin \"*\";
 	proxy_cache_key $host$request_uri;
 	proxy_cache_min_uses 2;
 	proxy_cache_valid 200 10h;
