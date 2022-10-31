@@ -22,7 +22,7 @@ services:
 
 ```
 ## nginx.conf
-```
+```nginx
 server {
     listen 80 default_server;
     server_name example.com;
@@ -42,7 +42,7 @@ server {
 }
 ```
 ## total config
-```
+```nginx
 proxy_cache_path /var/cache/nginx-static levels=1:2 keys_zone=static:10m inactive=120d;
 proxy_cache_path /var/cache/nginx-zerodown levels=1:2 keys_zone=zerodown:10m inactive=120d;
 
