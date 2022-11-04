@@ -1,0 +1,206 @@
+version: '3.8'
+services:
+  HA-1:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-1:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6380'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6380'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16380'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.62'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    ports:
+      - "6380:6380"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n21]
+      
+  HA-2:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-2:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6381'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6381'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16381'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.62'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    ports:
+      - "6381:6381"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n21]
+
+  HA-3:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-3:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6382'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6382'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16382'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.62'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    network_mode: "host" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n21]
+    ports:
+      - "6382:6382"
+      
+  HA-4:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-4:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6383'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6383'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16383'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.63'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    network_mode: "host" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n22]
+    ports:
+      - "6383:6383"
+      
+  HA-5:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-5:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6384'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6384'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16384'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.63'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    network_mode: "host" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n22]
+    ports:
+      - "6384:6384"
+      
+  HA-6:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-6:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6385'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6385'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16385'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.63'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    ports:
+      - "6385:6385"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n22]
+      
+  HA-7:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-7:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6386'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6386'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16386'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.64'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    ports:
+      - "6386:6386" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n23]
+      
+  HA-8:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-8:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6387'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6387'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16387'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.64'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    ports:
+      - "6387:6387" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n23]
+        
+  HA-9:
+    image: docker.mofid.dev/docker.io/bitnami/redis-cluster:6.2
+    volumes:
+      - HA-9:/bitnami/redis/data
+    environment:
+      - 'REDIS_CLUSTER_DYNAMIC_IPS=no'
+      - 'REDIS_PORT_NUMBER=6388'
+      - 'REDIS_CLUSTER_ANNOUNCE_PORT=6388'
+      - 'REDIS_CLUSTER_BUS_ANNOUNCE_PORT=16388'
+      - 'REDIS_CLUSTER_ANNOUNCE_IP=172.23.150.64'
+      - 'REDIS_CLUSTER_REPLICAS=1'
+      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_NODES=172.23.150.62:6380 172.23.150.62:6381 172.23.150.62:6382 172.23.150.63:6383 172.23.150.63:6384 172.23.150.63:6385 172.23.150.64:6386 172.23.150.64:6387 172.23.150.64:6388'
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == swarm-worker-n23]
+    ports:
+      - "6388:6388"
+    depends_on:
+      - HA-1
+      - HA-2
+      - HA-3
+      - HA-4
+      - HA-5
+      - HA-6
+      - HA-7
+      - HA-8
+      
+volumes:
+  HA-1:
+  HA-2:
+  HA-3:
+  HA-4:
+  HA-5:
+  HA-6:
+  HA-7:
+  HA-8:
+  HA-9:
