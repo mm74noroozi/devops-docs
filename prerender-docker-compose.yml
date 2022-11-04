@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+    debug:
+        image: raesene/alpine-nettools
+    prerender: # EXPOSE port 3000
+        image:  tvanro/prerender-alpine
+        restart: always #auto start prerender after reboot.
