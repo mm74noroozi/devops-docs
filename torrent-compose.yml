@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+    torrent:
+      image: wernight/qbittorrent
+      user: root
+      volumes: 
+      - ./config:/config
+      - ./downloads:/downloads
+      - ./torrents:/torrents
+      ports:
+      - 9000:6881
+      - 127.0.0.1:4081:8080
+      restart: always
+      
+    content:
+      image: halverneus/static-file-server:latest
+      restart: always
+      user: root
+      volumes:
+        - ./downloads:/web/downloads
+      ports:
+        - 127.0.0.1:4080:8080
