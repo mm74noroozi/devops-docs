@@ -1,0 +1,24 @@
+version: '3.9'
+
+networks:
+  network_default:
+    external: true
+  
+
+services:      
+  # Core services
+  chrome:
+    image: hub.hamdocker.ir/selenium/standalone-chrome
+    restart: always
+    networks:
+      - network_default
+    labels:
+        traefik.enable: true
+        traefik.http.routers.chrome.rule: Host(`chrome.mncdf.ir`)
+        traefik.http.routers.chrome-https.rule: Host(`chrome.mncdf.ir`)
+        traefik.http.routers.chrome.entrypoints: web
+        traefik.http.routers.chrome.service: selenium-chrome
+        traefik.http.routers.chrome-https.service: selenium-chrome
+        traefik.http.routers.chrome-https.entrypoints: websecure
+        traefik.http.routers.chrome-https.tls.certresolver: myresolver
+        traefik.http.services.selenium-chrome.loadbalancer.server.port: 4444
