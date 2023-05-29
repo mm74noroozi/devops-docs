@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  ir:
+    image: hub.hamdocker.ir/v2fly/v2fly-core:latest
+    entrypoint: /bin/sh -c
+    command:
+      - wget http://tange.s3.ir-thr-at1.arvanstorage.ir/ir/ir.mnsv.pw.json && v2ray run -c ir.mnsv.pw.json
+    networks:
+      - network_default
+      
+networks:
+  network_default:
+    external: true
