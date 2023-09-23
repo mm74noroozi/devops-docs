@@ -12,13 +12,11 @@ services:
     restart: always
     networks:
       - network_default
+    shm-size: 2g
     labels:
         traefik.enable: true
         traefik.http.routers.chrome.rule: Host(`chrome.mncdf.ir`)
-        traefik.http.routers.chrome-https.rule: Host(`chrome.mncdf.ir`)
-        traefik.http.routers.chrome.entrypoints: web
         traefik.http.routers.chrome.service: selenium-chrome
-        traefik.http.routers.chrome-https.service: selenium-chrome
-        traefik.http.routers.chrome-https.entrypoints: websecure
-        traefik.http.routers.chrome-https.tls.certresolver: myresolver
+        traefik.http.routers.chrome.entrypoints: websecure
+        traefik.http.routers.chrome.tls.certresolver: myresolver
         traefik.http.services.selenium-chrome.loadbalancer.server.port: 4444
