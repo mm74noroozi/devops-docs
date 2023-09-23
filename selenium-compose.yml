@@ -12,7 +12,7 @@ services:
     restart: always
     networks:
       - network_default
-    shm-size: 2g
+    shm_size: "2gb"
     labels:
         traefik.enable: true
         traefik.http.routers.chrome.rule: Host(`chrome.mncdf.ir`)
