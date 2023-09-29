@@ -16,7 +16,12 @@ services:
     labels:
         traefik.enable: true
         traefik.http.routers.chrome.rule: Host(`chrome.mncdf.ir`)
+        traefik.http.routers.webdrive.rule: Host(`webdrive.mncdf.ir`)
         traefik.http.routers.chrome.service: selenium-chrome
+        traefik.http.routers.webdrive.service: selenium-webdrive
         traefik.http.routers.chrome.entrypoints: websecure
+        traefik.http.routers.websecure.entrypoints: websecure
         traefik.http.routers.chrome.tls.certresolver: myresolver
-        traefik.http.services.selenium-chrome.loadbalancer.server.port: 4444
+        traefik.http.routers.websecure.tls.certresolver: myresolver
+        traefik.http.services.selenium-chrome.loadbalancer.server.port: 7900
+        traefik.http.services.selenium-websecure.loadbalancer.server.port: 4444
