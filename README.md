@@ -113,3 +113,6 @@ kubectl delete pods -n homeca-site --field-selector=status.phase=Failed
 kubectl get jobs -n homeca-site --field-selector status.successful=0
 kubectl delete jobs -n homeca-site --field-selector status.successful=0
 ```
+## CAP theorem
+partition tolerance: Partition Tolerance or robustness means that a given system continues to operate even with data loss or system failure
+
