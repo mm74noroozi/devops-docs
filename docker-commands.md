@@ -5,6 +5,6 @@
   ```
   - backup db
   ```
-  docker run --rm -e PGPASSWORD=your_password postgres \
+  docker run --rm postgres \
   pg_dump $CONNECTION_STRING > backup.sql
   ```
